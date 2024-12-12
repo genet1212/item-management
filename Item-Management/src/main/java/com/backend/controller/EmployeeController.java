@@ -4,10 +4,9 @@ import com.backend.model.Employee;
 import com.backend.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,16 +15,30 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
 
-    @GetMapping()
+    @GetMapping
     public List<Employee> getEmployees(){
         return employeeService.getEmployees();
     }
 
-    @GetMapping
-    public Employee getEmployeeByUserName(@RequestParam(name = "userName")String userName){
-      return employeeService.getByUserName(userName);
+    @GetMapping("/query")
+    public Employee getEmployeeByFirstName(@RequestParam(name = "firstName")String firstName){
+      return employeeService.getByFirstName(firstName);
+    }
+
+    @PostMapping
+    public Employee createEmployee(@RequestBody Employee employee){
+        return employeeService.createEmployee(employee);
+    }
+
+    @PutMapping("{id}")
+    public Employee updateEmployee(@PathVariable(name="id") Long id, @RequestBody Employee employee) {
+       return employeeService.updateEmployee(id, employee);
+    }
+    @DeleteMapping("{id}")
+    public Employee deleteEmployee(@PathVariable("id") Long id, @RequestBody Employee employee){
+        return employeeService.deleteEmployee(id, employee);
     }
 
 }

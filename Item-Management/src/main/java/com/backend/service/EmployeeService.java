@@ -8,5 +8,9 @@ import java.util.List;
 @Service
 public interface EmployeeService {
     List<Employee> getEmployees();
-    Employee getByUserName(String userName);
+    Employee getByFirstName(String firstName);
+    Employee createEmployee(Employee employee);
+    Employee getEmployee(Long id);
+    Employee updateEmployee(Long id, Employee employee);
+    Employee deleteEmployee(Long id, Employee employee);
 }
