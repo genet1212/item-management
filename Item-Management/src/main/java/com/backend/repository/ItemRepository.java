@@ -1,10 +1,10 @@
 package com.backend.repository;
 
-import com.backend.model.Employee;
+import com.backend.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    Employee findByFirstName(String firstName);
+public interface ItemRepository extends JpaRepository<Item, Long> {
+    Item findById(long id);
 }

@@ -50,7 +50,7 @@ public class DbConfig {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(mysqlServerDataSource());
         em.setPackagesToScan("com.backend");
-        em.setPersistenceUnitName("employee_managment_system");
+        em.setPersistenceUnitName("item_management_system");
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         final HashMap<String, Object> properties = new HashMap<>();
