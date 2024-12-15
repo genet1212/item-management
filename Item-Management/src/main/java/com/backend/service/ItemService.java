@@ -14,6 +14,6 @@ public interface ItemService {
     Optional<Item> getById(Long id);
     Item createItem(Item item);
     Item getItem(Long id);
-    Item updateItem(Long id, Item item);
-    Item deleteItem(Long id, Item item);
+    Item updateItem(Item item);
+    Optional<Item> deleteItem(Long id);
 }
