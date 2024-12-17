@@ -38,6 +38,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item createItem(Item item) {
+//        Get Category
+//        Set Category to item
+//        save
         return itemRepository.save(item);
     }
 

@@ -21,6 +21,10 @@ public class Item {
     @Column(name = "description")
     private String Description;
 
+    @ManyToOne
+    @JoinColumn(insertable=true, updatable = true, nullable = false)
+    private Category category;
+
     public Long getId() {
         return id;
     }
