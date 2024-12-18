@@ -66,6 +66,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<!--<version>3.0.0</version>-->
 			<scope>test</scope>
 		</dependency>
 		<!--<dependency>
@@ -73,6 +74,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.x</version>
 		</dependency>-->
+
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<!--<version>6.0.16.Final</version>--> <!-- Ensure this version or later -->
+		</dependency>
 	</dependencies>
 
 	<build>

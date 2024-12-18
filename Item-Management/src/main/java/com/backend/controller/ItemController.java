@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/items")
+@CrossOrigin(origins = "http://localhost:4200")   // Adjust for Angular's port
 public class ItemController {
 
     @Autowired

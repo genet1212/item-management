@@ -21,8 +21,8 @@ public class Item {
     @Column(name = "description")
     private String Description;
 
-    @ManyToOne
-    @JoinColumn(insertable=true, updatable = true, nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     public Long getId() {

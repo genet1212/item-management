@@ -30,7 +30,6 @@ public class ItemServiceImpl implements ItemService {
         return List.of();
     }
 
-
     @Override
     public Optional<Item> getById(Long id) {
         return itemRepository.findById(id);
@@ -60,5 +59,9 @@ public class ItemServiceImpl implements ItemService {
     public Optional<Item> deleteItem(Long id) {
         return itemRepository.findById(id);
     }
+
+      public Item patchItem(Item item){
+        return itemRepository.save(item);
+}
 
 }

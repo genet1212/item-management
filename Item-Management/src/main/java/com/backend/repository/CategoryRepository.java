@@ -1,10 +1,11 @@
 package com.backend.repository;
 
+import com.backend.model.Category;
 import com.backend.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Long> {
-    //Item findById(long id);
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+//    Category findById(long id);
 }
