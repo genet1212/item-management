@@ -18,7 +18,7 @@ import java.util.Optional;
 public class CategoryController {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    CategoryRepository categoryRepository;
 
     @GetMapping
     public ResponseEntity<List<Category>> getAllItems() {
@@ -33,20 +33,14 @@ public class CategoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/saveCategories")
-    public ResponseEntity<String>saveCategories(@RequestBody List<Category> catData){
-        categoryRepository.saveAll(catData);
-        return ResponseEntity.ok("Data Saved");
+    @PostMapping
+    public ResponseEntity<Category> createCategory(@RequestBody Category newCategory) {
+        if (newCategory == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        Category savedCategory = categoryRepository.save(newCategory);
+        return ResponseEntity.ok(savedCategory);
     }
-
-
-//    public ResponseEntity<Category> createCategory(@RequestBody Category newCategory) {
-//        if (newCategory == null) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//        Category savedCategory = categoryRepository.save(newCategory);
-//        return ResponseEntity.ok(savedCategory);
-//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category updatedCategory) {

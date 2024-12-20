@@ -2,57 +2,48 @@ package com.backend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Entity(name="Item")
 @Table(name="items")
 public class Item {
 
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "name")
+    @Setter
+    @Column(nullable = false)
     private String Name;
-    @Column(name= "price")
+    @Setter
+    @Column(name = "price")
     private String Price;
-    @Column(name = "quantity")
+    @Setter
+    @Column(nullable = false)
     private String Quantity;
-    @Column(name = "description")
+    @Setter
+    @Column(nullable = false)
     private String Description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getName() {
-        return Name;
-    }
-    public void setName(String name) {
-        this.Name = name;
-    }
-    public String getPrice() {
-        return Price;
-    }
-    public  void  setPrice(String price) {
-        this.Price = price;
-    }
-    public String getQuantity() {
-        return Quantity;
-    }
-    public void  setQuantity(String quantity) {
-        this.Quantity = quantity;
-    }
-    public String getDescription() {
-        return Description;
-    }
-    public void setDescription(String description) {
-        this.Description = description;
+    private Category category;
+    public Category getCategory() {return category;}
+
+    public Long getId() {return id;}
+
+    public String getName() {return Name;}
+
+    public String getPrice() {return Price;}
+
+    public String getQuantity() {return Quantity;}
+
+    public String getDescription() {return Description;}
+
+    public void assignCategory(Category category) {
+        this.category = category;
     }
 }
