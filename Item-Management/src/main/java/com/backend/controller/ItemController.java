@@ -43,35 +43,19 @@ public class ItemController {
         return ResponseEntity.ok(savedItem);
     }
 
-    @PutMapping("/{itemId}/categories/{categoryId}")
-    public ResponseEntity<Item> assignCategoryToItem(@PathVariable Long itemId, @PathVariable Long categoryId) {
-        Optional<Item> itemOptional = itemRepository.findById(itemId);
-        Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
-
-        if (itemOptional.isPresent() && categoryOptional.isPresent()) {
-            Item item = itemOptional.get();
-            Category category = categoryOptional.get();
-            item.assignCategory(category);
-            Item updatedItem = itemRepository.save(item);
-            return ResponseEntity.ok(updatedItem);
-        }
-        return ResponseEntity.notFound().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
+        return itemRepository.findById(id)
+                .map(existingItem -> {
+                    existingItem.setName(updatedItem.getName());
+                    existingItem.setPrice(updatedItem.getPrice());
+                    existingItem.setQuantity(updatedItem.getQuantity());
+                    existingItem.setDescription(updatedItem.getDescription());
+                    Item savedItem = itemRepository.save(existingItem);
+                    return ResponseEntity.ok(savedItem);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
-
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
-//        return itemRepository.findById(id)
-//                .map(existingItem -> {
-//                    existingItem.setName(updatedItem.getName());
-//                    existingItem.setPrice(updatedItem.getPrice());
-//                    existingItem.setQuantity(updatedItem.getQuantity());
-//                    existingItem.setDescription(updatedItem.getDescription());
-//                    Item savedItem = itemRepository.save(existingItem);
-//                    return ResponseEntity.ok(savedItem);
-//                })
-//                .orElse(ResponseEntity.notFound().build());
-//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteItem(@PathVariable Long id) {
