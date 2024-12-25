@@ -1,8 +1,28 @@
 package com.backend.model;
 
-public enum Role {
+import com.backend.enums.ERole;
+import jakarta.persistence.*;
+import lombok.Data;
 
-    USER,
+@Entity
+@Table(name = "roles")
+@Data
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    ADMIN
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private ERole name;
+
+    public Role() {
+
+    }
+
+    public Role(ERole name) {
+        this.name = name;
+    }
+
+    // getters and setters
 }
