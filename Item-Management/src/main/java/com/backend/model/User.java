@@ -2,9 +2,6 @@ package com.backend.model;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-
 import java.util.HashSet;
 import java.util.Set;
 

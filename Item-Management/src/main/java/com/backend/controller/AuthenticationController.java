@@ -1,7 +1,6 @@
 package com.backend.controller;
 
 import com.backend.dtoes.*;
-import com.backend.model.User;
 import com.backend.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-    private final AuthenticationService service;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
     public ResponseEntity<MessageResponse> register(@RequestBody RegisterRequest request)
     {
-        MessageResponse authRes =  service.register(request);
+        MessageResponse authRes =  authenticationService.register(request);
 //         RegisterResponse response = new RegisterResponse(
 //                 authRes.getUserName(),
 //                 authRes.getEmail(),
@@ -32,6 +31,6 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request)
     {
         System.out.println("Request: " + request.getPassword() + request.getUserName());
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 }

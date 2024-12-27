@@ -1,7 +1,5 @@
 package com.backend.dtoes;
 
-import com.backend.enums.ERole;
-import com.backend.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

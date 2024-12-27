@@ -2,7 +2,6 @@ package com.backend.dtoes;
 
 import com.backend.model.Role;
 
-import java.util.List;
 import java.util.Set;
 
 public class RegisterResponse {
@@ -16,10 +15,7 @@ public class RegisterResponse {
         this.roles = roles;
     }
 
-
-    public String getuserName() {
-        return userName;
-    }
+    public String getuserName() {return userName;}
 
     public String getEmail() {
         return email;
@@ -29,9 +25,7 @@ public class RegisterResponse {
         return roles;
     }
 
-    public void setuserName(String userName) {
-        this.userName = userName;
-    }
+    public void setuserName(String userName) {this.userName = userName;}
 
     public void setEmail(String email) {
         this.email = email;

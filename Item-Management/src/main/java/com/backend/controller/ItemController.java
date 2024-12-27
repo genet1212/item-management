@@ -5,6 +5,7 @@ import com.backend.model.Item;
 import com.backend.repository.CategoryRepository;
 import com.backend.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,15 +34,26 @@ public class ItemController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+//
+//    @PostMapping
+//    public ResponseEntity<Item> createItem(@RequestBody Item newItem) {
+//        if (newItem == null) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//        Item savedItem = itemRepository.save(newItem);
+//        return ResponseEntity.ok(savedItem);
+//    }
 
     @PostMapping
     public ResponseEntity<Item> createItem(@RequestBody Item newItem) {
-        if (newItem == null) {
-            return ResponseEntity.badRequest().build();
+        if (newItem == null || newItem.getCategory() == null || newItem.getCategory().getId() == null) {        return ResponseEntity.badRequest().body(null);
         }
-        Item savedItem = itemRepository.save(newItem);
-        return ResponseEntity.ok(savedItem);
-    }
+        Optional<Category> categoryOptional = categoryRepository.findById(newItem.getCategory().getId());
+        if (!categoryOptional.isPresent()) { return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(null);    }
+
+        newItem.assignCategory(categoryOptional.get());    Item savedItem = itemRepository.save(newItem);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);}
 
     @PutMapping("/{id}")
     public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
