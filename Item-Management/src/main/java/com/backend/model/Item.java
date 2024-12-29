@@ -19,13 +19,14 @@ public class Item {
     private String Name;
     @Setter
     @Column(name = "price")
-    private String Price;
+    private Long Price;
     @Setter
     @Column(nullable = false)
-    private String Quantity;
+    private Long Quantity;
     @Setter
     @Column(nullable = false)
     private String Description;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
@@ -37,9 +38,9 @@ public class Item {
 
     public String getName() {return Name;}
 
-    public String getPrice() {return Price;}
+    public Long getPrice() {return Price;}
 
-    public String getQuantity() {return Quantity;}
+    public Long getQuantity() {return Quantity;}
 
     public String getDescription() {return Description;}
 
