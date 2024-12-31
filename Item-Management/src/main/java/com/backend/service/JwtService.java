@@ -37,8 +37,7 @@ public class JwtService {
             Map<String,Object> extractClaims,
             UserDetails userDetails
     ){
-        return Jwts
-                .builder()
+        return Jwts.builder()
                 .setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))

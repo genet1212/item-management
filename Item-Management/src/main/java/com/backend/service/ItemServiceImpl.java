@@ -60,8 +60,4 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findById(id);
     }
 
-      public Item patchItem(Item item){
-        return itemRepository.save(item);
-}
-
 }

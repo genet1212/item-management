@@ -1,19 +1,21 @@
 package com.backend.controller;
 
 import com.backend.dtoes.*;
+import com.backend.repository.UserRepository;
 import com.backend.service.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<MessageResponse> register(@RequestBody RegisterRequest request)
@@ -33,4 +35,20 @@ public class AuthenticationController {
         System.out.println("Request: " + request.getPassword() + request.getUserName());
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
+
+    @PutMapping("/username-update/{id}")
+    public ResponseEntity updateUserName(@PathVariable("id") long id,@Valid @RequestBody UserNameUpdateRequest usernameUpdateRequest) {
+        Optional user = userRepository.findById(id);
+        if (userRepository.existsByUserName(usernameUpdateRequest.getUserName())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+        }
+        else{
+            user.equals(usernameUpdateRequest.getUserName());
+            return ResponseEntity
+                    .ok(new MessageResponse("Username is updated!"));
+        }
+    }
+
 }
