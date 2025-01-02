@@ -39,6 +39,7 @@ public class AuthenticationController {
         System.out.println("Request: " + request.getPassword() + request.getUserName());
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
+
 }
 
 
