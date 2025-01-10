@@ -1,50 +1,37 @@
 package com.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore; // Optional annotation
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Setter;
 
 @Data
-@Entity(name="Item")
-@Table(name="items")
+@Entity(name = "Item")
+@Table(name = "items")
 public class Item {
 
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
     @Column(nullable = false)
-    private String Name;
-    @Setter
-    @Column(name = "price")
-    private Long Price;
-    @Setter
-    @Column(nullable = false)
-    private Long Quantity;
-    @Setter
-    @Column(nullable = false)
-    private String Description;
+    private String name; // Use camelCase
 
+    @Column(name = "price")
+    private Long price;
+
+    @Column(nullable = false)
+    private Long quantity;
+
+    @Column(nullable = false)
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 
+    @JsonIgnore
     private Category category;
-    public Category getCategory() {return category;}
 
-    public Long getId() {return id;}
-
-    public String getName() {return Name;}
-
-    public Long getPrice() {return Price;}
-
-    public Long getQuantity() {return Quantity;}
-
-    public String getDescription() {return Description;}
-
-    public void assignCategory(Category category) {
-        this.category = category;
-    }
+    // No need for redundant @Setter with @Data
 }

@@ -37,14 +37,12 @@ public class ItemController {
 
     @PostMapping
     public ResponseEntity<Item> createItem(@RequestBody Item newItem) {
-        if (newItem == null || newItem.getCategory() == null || newItem.getCategory().getId() == null) {        return ResponseEntity.badRequest().body(null);
+        if (newItem == null) {
+            return ResponseEntity.badRequest().build();
         }
-        Optional<Category> categoryOptional = categoryRepository.findById(newItem.getCategory().getId());
-        if (!categoryOptional.isPresent()) { return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(null);    }
-
-        newItem.assignCategory(categoryOptional.get());    Item savedItem = itemRepository.save(newItem);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);}
+        Item savedItem = itemRepository.save(newItem);
+        return ResponseEntity.ok(savedItem);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
