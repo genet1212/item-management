@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 @Data
 @Entity(name="Item")
 @Table(name="items")
-public class Item {
+public class Item implements Serializable {
 
     @Setter
     @Id
@@ -30,7 +33,6 @@ public class Item {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-
     private Category category;
     public Category getCategory() {return category;}
 
@@ -46,5 +48,17 @@ public class Item {
 
     public void assignCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(id, item.id) && Objects.equals(Name, item.Name) && Objects.equals(Price, item.Price) && Objects.equals(Quantity, item.Quantity) && Objects.equals(Description, item.Description) && Objects.equals(category, item.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, Name, Price, Quantity, Description, category);
     }
 }

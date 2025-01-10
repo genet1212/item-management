@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity(name = "Category")
 @Table(name="categories")
-public class Category {
+public class Category implements Serializable {
     @Setter
     @Getter
     @Id
@@ -22,7 +24,6 @@ public class Category {
     private String Name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-
     @JsonIgnore
     private List<Item> items;
 
