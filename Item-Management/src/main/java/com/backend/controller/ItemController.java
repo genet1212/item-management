@@ -52,6 +52,7 @@ public class ItemController {
                     existingItem.setPrice(updatedItem.getPrice());
                     existingItem.setQuantity(updatedItem.getQuantity());
                     existingItem.setDescription(updatedItem.getDescription());
+                    existingItem.setExpiration_date(updatedItem.getExpiration_date());
                     Item savedItem = itemRepository.save(existingItem);
                     return ResponseEntity.ok(savedItem);
                 })
@@ -84,6 +85,9 @@ public class ItemController {
 //                    }
 //                    if (partialItem.getDescription() != null) {
 //                        existingItem.setDescription(partialItem.getDescription());
+//                    }
+//                      if (partialItem.getExpiration_date() != null) {
+//                        existingItem.setExpiration_date(partialItem.getExpiration_date());
 //                    }
 //                    Item savedItem = itemRepository.save(existingItem);
 //                    return ResponseEntity.ok(savedItem);

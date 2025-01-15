@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
+import java.time.LocalDate;
+
 @Data
 @Entity(name = "Item")
 @Table(name = "items")
@@ -22,6 +25,9 @@ public class  Item {
 
     @Column(nullable = false)
     private Long quantity;
+
+    @Column(name = "expiration_date")
+    private LocalDate expirationDate;
 
     @Column(nullable = false)
     private String description;
