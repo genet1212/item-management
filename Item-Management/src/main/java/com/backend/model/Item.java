@@ -39,5 +39,13 @@ public class  Item {
     @JsonIgnore
     private Category category;
 
+    public Object getExpiration_date() {
+        return expirationDate;
+    }
+
+    public void setExpiration_date(Object expirationDate) {
+     
+    }
+
     // No need for redundant @Setter with @Data
 }
