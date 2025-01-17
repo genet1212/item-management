@@ -5,6 +5,7 @@ import com.backend.repository.UserRepository;
 import com.backend.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +21,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService;
+    @Autowired
+    AuthenticationService authenticationService;
+    @Autowired
     UserRepository userRepository;
 
     @PostMapping("/register")

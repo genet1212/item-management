@@ -10,6 +10,7 @@ import com.backend.model.User;
 import com.backend.repository.RoleRepository;
 import com.backend.repository.UserRepository;
 import com.backend.security.JwtUtils;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -84,10 +87,10 @@ public class AuthenticationService {
 
         user.setRoles(roles);
         userRepository.save(user);
-        return new MessageResponse("You have successfully created your account!");
+        return new MessageResponse("User registered successfully!");
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse authenticate(@Valid @RequestBody AuthenticationRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));
         System.out.println("AUTH: " + authentication.getName());
