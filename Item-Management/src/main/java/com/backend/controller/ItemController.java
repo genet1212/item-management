@@ -4,6 +4,7 @@ import com.backend.model.Category;
 import com.backend.model.Item;
 import com.backend.repository.CategoryRepository;
 import com.backend.repository.ItemRepository;
+import com.backend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class ItemController {
      ItemRepository itemRepository;
     @Autowired
      CategoryRepository categoryRepository;
+    @Autowired
+    ItemService itemService;
 
     @GetMapping
     public ResponseEntity<List<Item>> getAllItems() {
@@ -67,6 +70,12 @@ public class ItemController {
         }
         return ResponseEntity.notFound().build();
     }
+
+
+//    @GetMapping("/expiring")
+//    public List<Item> getExpiringProducts() {
+//        return itemService.findExpiredProducts();
+//    }
 
 
 //

@@ -5,8 +5,10 @@ import com.backend.model.Item;
 import com.backend.repository.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,13 +47,13 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getItem(Long id) {
-        return itemRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Item with an id: " + id + "was not found"));
+        return itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Item with an id: " + id + "was not found"));
     }
 
     @Override
     public Item updateItem(Item item) {
         //Item existingItem = itemRepository.findById(id).get();
-       // BeanUtils.copyProperties(item, existingItem, getNullPropertyNames(item));
+        // BeanUtils.copyProperties(item, existingItem, getNullPropertyNames(item));
         return itemRepository.save(item);
     }
 
