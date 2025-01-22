@@ -1,6 +1,6 @@
 package com.backend;
 
-import com.backend.service.EmailSenderService;
+//import com.backend.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,17 +21,17 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableScheduling
 public class ItemManagementApplication {
    @Autowired
-	EmailSenderService emailSenderService;
+	//EmailSenderService emailSenderService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ItemManagementApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void sendMail(){
-		emailSenderService.sendEmail("admin@example.com",
-				"This is Subject",
-				"This is Body of Email");
-	}
+//	@EventListener(ApplicationReadyEvent.class)
+//	public void sendMail(){
+//		emailSenderService.sendEmail("admin@example.com",
+//				"This is Subject",
+//				"This is Body of Email");
+//	}
 
 }
