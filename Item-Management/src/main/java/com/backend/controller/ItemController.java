@@ -77,32 +77,32 @@ public class ItemController {
 //        return itemService.findExpiredProducts();
 //    }
 
-
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<Item> patchItem(@PathVariable Long id, @RequestBody Item partialItem) {
-        return itemRepository.findById(id)
-                .map(existingItem -> {
-                    if (partialItem.getName() != null) {
-                        existingItem.setName(partialItem.getName());
-                    }
-                    if (partialItem.getPrice() != null) {
-                        existingItem.setPrice(partialItem.getPrice());
-                    }
-                    if (partialItem.getQuantity() != null) {
-                        existingItem.setQuantity(partialItem.getQuantity());
-                    }
-                    if (partialItem.getDescription() != null) {
-                        existingItem.setDescription(partialItem.getDescription());
-                    }
-                      if (partialItem.getExpiration_date() != null) {
-                        existingItem.setExpiration_date(partialItem.getExpiration_date());
-                    }
-                    Item savedItem = itemRepository.save(existingItem);
-                    return ResponseEntity.ok(savedItem);
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
+//
+//
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<Item> patchItem(@PathVariable Long id, @RequestBody Item partialItem) {
+//        return itemRepository.findById(id)
+//                .map(existingItem -> {
+//                    if (partialItem.getName() != null) {
+//                        existingItem.setName(partialItem.getName());
+//                    }
+//                    if (partialItem.getPrice() != null) {
+//                        existingItem.setPrice(partialItem.getPrice());
+//                    }
+//                    if (partialItem.getQuantity() != null) {
+//                        existingItem.setQuantity(partialItem.getQuantity());
+//                    }
+//                    if (partialItem.getDescription() != null) {
+//                        existingItem.setDescription(partialItem.getDescription());
+//                    }
+//                      if (partialItem.getExpiration_date() != null) {
+//                        existingItem.setExpiration_date(partialItem.getExpiration_date());
+//                    }
+//                    Item savedItem = itemRepository.save(existingItem);
+//                    return ResponseEntity.ok(savedItem);
+//                })
+//                .orElse(ResponseEntity.notFound().build());
+//    }
 
 }
  
